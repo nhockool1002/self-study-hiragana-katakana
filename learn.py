@@ -318,7 +318,7 @@ class MainWindow(QWidget):
 
             self.setGeometry(screen_rect.width() - self.width(), screen_rect.height() - self.height(), self.width(), self.height())
 
-            if self.quizz_popup is not None and not self.quizz_popup.isActiveWindow():
+            if self.quizz_popup is None:
                 self.activateWindow()
                 self.raise_()
 
@@ -346,7 +346,15 @@ class MainWindow(QWidget):
             
             pygame.mixer.quit()
 
-            os.remove("text_generate.mp3")
+            file_path = "text_generate.mp3"
+            if os.path.exists(file_path):
+                try:
+                    os.remove(file_path)
+                    print(f"{file_path} removed successfully.")
+                except Exception as e:
+                    print(f"Error removing {file_path}: {e}")
+            else:
+                print(f"{file_path} does not exist.")
             event.accept()
         except Exception as e:
             logging.error(f"Error in closeEvent: {e}")
