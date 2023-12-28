@@ -3,3 +3,4 @@ gtts==2.2.3
 pygame==2.0.1
 slack
 slack_sdk
+python-dotenv
