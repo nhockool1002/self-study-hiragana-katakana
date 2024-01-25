@@ -288,35 +288,35 @@ class MainWindow(QWidget):
         self.label.setStyleSheet("color: red; font-size: 60px; font-weight: bold; margin-bottom: 20px;")
         self.label.setFixedHeight(100)
 
-        self.checkbox_word = QCheckBox("Show Words", self)
+        self.checkbox_word = QCheckBox("たんごをひょうじ", self)
         self.checkbox_word.setFont(self.japanese_font)
         self.checkbox_word.setStyleSheet("color: white; font-size: 12px; font-weight: bold;")
         self.checkbox_word.stateChanged.connect(self.show_random_character)
 
-        next_button = QPushButton("Next ➡️", self)
+        next_button = QPushButton("つぎへ ➡️", self)
         next_button.clicked.connect(self.show_random_character)
         next_button.setFont(self.japanese_font)
         next_button.setStyleSheet("color: black; font-size: 12px; background-color: yellow; font-weight: bold;")
 
-        speak_button = QPushButton("Speak 🗣️", self)
+        speak_button = QPushButton("はなす 🗣️", self)
         speak_button.clicked.connect(self.speak_character)
         speak_button.setFont(self.japanese_font)
         speak_button.setStyleSheet("color: black; font-size: 12px; background-color: yellow; font-weight: bold;")
 
-        quizz_button = QPushButton("Quizz 💯", self)
+        quizz_button = QPushButton("くいず 💯", self)
         quizz_button.clicked.connect(self.show_quizz_popup)
         quizz_button.setFont(self.japanese_font)
         quizz_button.setStyleSheet("color: black; font-size: 12px; background-color: yellow; font-weight: bold;")
 
-        close_button = QPushButton("Close ❌", self)
+        close_button = QPushButton("とじる ❌", self)
         close_button.clicked.connect(self.close)
         close_button.setFont(self.japanese_font)
         close_button.setStyleSheet("color: black; font-size: 12px; background-color: #78f542; font-weight: bold;")
 
-        hiragana_table_button = QPushButton("Hiragana Table", self)
+        hiragana_table_button = QPushButton("ひらがな たぶる", self)
         hiragana_table_button.clicked.connect(self.show_hiragana_table)
 
-        self.version_label = QLabel("🍁 Developed by NhutNM Ⓒ 2023 - Version 1.0", self)
+        self.version_label = QLabel("🍁 NhutNM にょってかいはつ Ⓒ 2023 - バージョン 1.0", self)
         self.version_label.setAlignment(Qt.AlignCenter)
         self.version_label.setFont(self.japanese_font)
         self.version_label.setStyleSheet("color: #9ACD32; font-size: 7px; margin-top: 15px;")
@@ -357,7 +357,7 @@ class MainWindow(QWidget):
             show_words = self.checkbox_word.isChecked()
             if show_words:
                 character = random.choice(word_list)
-                font_size = 35
+                font_size = 25
             else:
                 character = random.choice(hiragana_list + hiragana_dakuten + katakana_list + katakana_dakuten)
                 font_size = 60
