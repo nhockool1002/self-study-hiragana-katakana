@@ -1,7 +1,8 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QDialog, QGridLayout, QLabel, QVBoxLayout, QDesktopWidget
-from PyQt5.QtGui import QFont
-from PyQt5.QtCore import Qt
+from PyQt6.QtGui import QScreen, QGuiApplication
+from PyQt6.QtWidgets import QApplication, QDialog, QGridLayout, QLabel, QVBoxLayout
+from PyQt6.QtGui import QFont
+from PyQt6.QtCore import Qt
 
 class HiraganaTablePopup(QDialog):
     def __init__(self):
@@ -64,11 +65,11 @@ class HiraganaTablePopup(QDialog):
             word_lt = hiragana_char
 
             char_label = QLabel(char, self)
-            char_label.setAlignment(Qt.AlignCenter)
+            char_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             char_label.setFont(font_hiragana)
 
             word_label = QLabel(word_lt, self)
-            word_label.setAlignment(Qt.AlignCenter)
+            word_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             word_label.setFont(font_word)
 
             # Set background color and padding for both labels
@@ -95,11 +96,11 @@ class HiraganaTablePopup(QDialog):
         last_row_bottom = (len(self.hiragana_order) // 5) * 2 * 20  # Assuming 2 rows per character
 
         # Set the position to the lower right corner of the screen, aligned with the bottom of the last row
-        screen_geometry = QDesktopWidget().screenGeometry()
+        screen_geometry = QGuiApplication.primaryScreen().geometry()
         self.move(screen_geometry.width() - self.width(), screen_geometry.height() - last_row_bottom)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     hiragana_popup = HiraganaTablePopup()
     hiragana_popup.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

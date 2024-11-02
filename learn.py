@@ -8,10 +8,11 @@ import pygame
 
 from pathlib import Path
 from dotenv import load_dotenv
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QVBoxLayout, QDesktopWidget, QCheckBox, QDialog, QRadioButton, QButtonGroup, QGridLayout
-from PyQt5.QtCore import QTimer, Qt
-from PyQt5.QtGui import QFont, QFontDatabase
-from PyQt5 import QtCore
+from PyQt6.QtGui import QScreen
+from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QVBoxLayout, QCheckBox, QDialog, QRadioButton, QButtonGroup, QGridLayout
+from PyQt6.QtCore import QTimer, Qt
+from PyQt6.QtGui import QFont, QFontDatabase
+from PyQt6 import QtCore
 from gtts import gTTS
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
@@ -81,7 +82,7 @@ class QuizPopup(QDialog):
         layout = QVBoxLayout(self)
         self.setLayout(layout)
 
-        desktop = QDesktopWidget()
+        desktop = QScreen()
         screen_rect = desktop.availableGeometry()
         self.setGeometry(screen_rect.width() - popup_width, screen_rect.height() - popup_height, popup_width, popup_height)
 
@@ -89,7 +90,7 @@ class QuizPopup(QDialog):
         self.correct_answers = 0
 
         self.question_label = QLabel("", self)
-        self.question_label.setAlignment(Qt.AlignCenter)
+        self.question_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.question_label.setStyleSheet("color: red; font-size: 70px; font-weight: bold; margin-bottom: 20px;")
         self.question_label.setFont(self.japanese_font)
         self.radio_buttons = []
@@ -164,11 +165,11 @@ class QuizPopup(QDialog):
     def show_result(self):
         try:
             icon_label = QLabel("🎉", self)
-            icon_label.setAlignment(Qt.AlignCenter)
+            icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             icon_label.setStyleSheet("font-size: 50px; margin-bottom: 5px;")
 
             result_label = QLabel(f"Correct Answers: {self.correct_answers}", self)
-            result_label.setAlignment(Qt.AlignCenter)
+            result_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             result_label.setStyleSheet("color: green; font-size: 20px; font-weight: bold; margin-bottom: 20px;")
 
             close_button = QPushButton("Close Result!", self)
@@ -263,7 +264,7 @@ class QuizPopup(QDialog):
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.japanese_font = QFont();
+        self.japanese_font = QFont()
         self.quizz_popup = None
         font_path = os.path.abspath('fonts/MPLUS2-VariableFont_wght.ttf')
 
@@ -283,7 +284,7 @@ class MainWindow(QWidget):
         self.setStyleSheet("background-color: white; background-color: black;")
 
         self.label = QLabel("", self)
-        self.label.setAlignment(Qt.AlignCenter)
+        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label.setFont(self.japanese_font)
         self.label.setStyleSheet("color: red; font-size: 60px; font-weight: bold; margin-bottom: 20px;")
         self.label.setFixedHeight(100)
@@ -317,7 +318,7 @@ class MainWindow(QWidget):
         hiragana_table_button.clicked.connect(self.show_hiragana_table)
 
         self.version_label = QLabel("🍁 NhutNM にょってかいはつ Ⓒ 2023 - バージョン 1.0", self)
-        self.version_label.setAlignment(Qt.AlignCenter)
+        self.version_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.version_label.setFont(self.japanese_font)
         self.version_label.setStyleSheet("color: #9ACD32; font-size: 7px; margin-top: 15px;")
 
@@ -332,7 +333,7 @@ class MainWindow(QWidget):
         grid_layout.addWidget(close_button, 1, 1)
 
         layout.addLayout(grid_layout)
-        layout.addWidget(self.version_label, alignment=Qt.AlignRight | Qt.AlignBottom)
+        layout.addWidget(self.version_label, alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom)
         layout.addWidget(hiragana_table_button)
 
         self.setGeometry(0, 0, 230, 0)
@@ -365,7 +366,7 @@ class MainWindow(QWidget):
             self.label.setStyleSheet(f"color: red; font-size: {font_size}px; font-weight: bold; margin-bottom: 20px;")
             
 
-            desktop = QDesktopWidget()
+            desktop = QApplication.primaryScreen()
             screen_rect = desktop.availableGeometry()
 
             self.setGeometry(screen_rect.width() - self.width(), screen_rect.height() - self.height(), self.width(), self.height())
@@ -393,7 +394,7 @@ class MainWindow(QWidget):
 
     def show_hiragana_table(self):
         hiragana_table_popup = HiraganaTablePopup()
-        hiragana_table_popup.exec_()
+        hiragana_table_popup.exec()
 
     def closeEvent(self, event):
         try:
@@ -419,4 +420,4 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     main_app = MainWindow()
     main_app.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

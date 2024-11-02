@@ -1,0 +1,5 @@
+ERROR:root:Error in show_random_character: name 'QDesktopWidget' is not defined
+ERROR:root:Error in show_random_character: name 'QDesktopWidget' is not defined
+ERROR:root:Error in show_random_character: name 'QDesktopWidget' is not defined
+ERROR:root:Error in show_random_character: PyQt6.QtGui.QScreen cannot be instantiated or sub-classed
+ERROR:root:Error in show_random_character: PyQt6.QtGui.QScreen cannot be instantiated or sub-classed

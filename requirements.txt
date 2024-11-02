@@ -1,6 +1,6 @@
-PyQt5==5.15.4
+PyQt6==6.5.0
 gtts==2.2.3
-pygame==2.0.1
+pygame
 slack
 slack_sdk
 python-dotenv
